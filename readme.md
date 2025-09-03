@@ -72,19 +72,19 @@ Sistema de tokens. Tokens são strings aleatórias armazenadas no banco de dados
 ## Endpoints Privados (com token)
 
 ### Boards (apenas owner)
-**POST** `/boards` - Criar board
-**PATCH** `/boards/{id}` - Editar título/descrição
-**DELETE** `/boards/{id}` - Deletar board
+- **POST** `/boards` - Criar board
+- **PATCH** `/boards/{id}` - Editar título/descrição
+- **DELETE** `/boards/{id}` - Deletar board
 
 ### Colunas (apenas owner)
-**POST** `/boards/{id}/columns` - Adicionar coluna
-**PATCH** `/columns/{id}` - Editar coluna/WIP
-**DELETE** `/columns/{id}` - Deletar coluna
+- **POST** `/boards/{id}/columns` - Adicionar coluna
+- **PATCH** `/columns/{id}` - Editar coluna/WIP
+- **DELETE** `/columns/{id}` - Deletar coluna
 
 ### Cards (qualquer usuário logado)
-**POST** `/boards/{id}/cards` - Criar card
-**PATCH** `/cards/{id}` - Editar ou mover card
-**DELETE** `/cards/{id}` - Deletar card
+- **POST** `/boards/{id}/cards` - Criar card
+- **PATCH** `/cards/{id}` - Editar ou mover card
+- **DELETE** `/cards/{id}` - Deletar card
 
 ## Códigos de Erro
 
