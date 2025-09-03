@@ -1,6 +1,6 @@
 # Projeto Kanban API
 
-Sistema de quadros Kanban com autenticação JWT. Boards são públicos para leitura, mas modificações requerem autenticação.
+Sistema de quadros Kanban com autenticação token. Boards são públicos para leitura, mas modificações requerem autenticação.
 
 ## Configuração do Projeto
 
@@ -38,11 +38,9 @@ php artisan serve
 ## Regras de Negócio
 
 1. **Boards públicos**: Qualquer pessoa pode visualizar (GET) sem login
-2. **Modificações privadas**: Criar/editar/deletar requer token JWT
-3. **Ownership**: Apenas o dono do board pode alterar configurações (título, colunas, WIP)
-4. **WIP Limit**: Cada coluna tem limite de cards; bloquear se exceder
-5. **Histórico**: Registrar todas as ações (criar, mover, editar, deletar)
-6. **Colunas padrão**: Todo board nasce com "To Do", "Doing", "Done" (WIP: 999)
+2. **Modificações privadas**: Criar/editar/deletar requer token
+3. **WIP Limit**: Cada coluna tem limite de cards; bloquear se exceder
+4. **Colunas padrão**: Todo board nasce com "To Do", "Doing", "Done" (WIP: 999)
 
 ## Entidades
 
@@ -50,11 +48,10 @@ php artisan serve
 - **Board**: id, title, description, owner_id  
 - **Column**: id, board_id, name, order, wip_limit
 - **Card**: id, board_id, column_id, title, description, position, created_by
-- **MoveHistory**: id, card_id, board_id, from_column_id, to_column_id, type, by_user_id, at
 
 ## Autenticação (Token Customizado)
 
-Sistema de tokens customizado sem JWT. Tokens são strings aleatórias armazenadas no banco de dados.
+Sistema de tokens. Tokens são strings aleatórias armazenadas no banco de dados.
 
 **POST** `/login` - Login com email/senha → retorna access_token e refresh_token
 **POST** `/refresh` - Renovar access_token usando refresh_token
@@ -69,29 +66,24 @@ Sistema de tokens customizado sem JWT. Tokens são strings aleatórias armazenad
 ## Endpoints Públicos (sem token)
 
 **GET** `/boards` - Lista todos os boards com resumo
-**GET** `/boards/{id}` - Detalhe completo do board
-**GET** `/boards/{id}/columns` - Colunas do board
-**GET** `/boards/{id}/cards` - Cards do board  
-**GET** `/boards/{id}/history` - Histórico do board
+**GET** `/boards/{id}` - Detalhe completo do board (Trazendo nome do board, colunas e card em cada coluna)
 **GET** `/cards/{id}` - Detalhe do card
-**GET** `/cards/{id}/history` - Histórico do card
 
 ## Endpoints Privados (com token)
 
 ### Boards (apenas owner)
 **POST** `/boards` - Criar board
 **PATCH** `/boards/{id}` - Editar título/descrição
-**DELETE** `/boards/{id}` - Deletar board (opcional)
+**DELETE** `/boards/{id}` - Deletar board
 
 ### Colunas (apenas owner)
 **POST** `/boards/{id}/columns` - Adicionar coluna
 **PATCH** `/columns/{id}` - Editar coluna/WIP
-**DELETE** `/columns/{id}` - Deletar coluna (opcional)
+**DELETE** `/columns/{id}` - Deletar coluna
 
 ### Cards (qualquer usuário logado)
 **POST** `/boards/{id}/cards` - Criar card
 **PATCH** `/cards/{id}` - Editar ou mover card
-**POST** `/cards/{id}/move` - Mover card (alternativo)
 **DELETE** `/cards/{id}` - Deletar card
 
 ## Códigos de Erro
