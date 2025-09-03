@@ -53,9 +53,9 @@ php artisan serve
 
 Sistema de tokens. Tokens são strings aleatórias armazenadas no banco de dados.
 
-**POST** `/login` - Login com email/senha → retorna access_token e refresh_token
-**POST** `/refresh` - Renovar access_token usando refresh_token
-**POST** `/logout` - Invalidar tokens atuais
+- **POST** `/login` - Login com email/senha → retorna access_token e refresh_token
+- **POST** `/refresh` - Renovar access_token usando refresh_token
+- **POST** `/logout` - Invalidar tokens atuais
 
 **Header necessário**: `Authorization: Bearer {access_token}`
 
@@ -65,9 +65,9 @@ Sistema de tokens. Tokens são strings aleatórias armazenadas no banco de dados
 
 ## Endpoints Públicos (sem token)
 
-**GET** `/boards` - Lista todos os boards com resumo
-**GET** `/boards/{id}` - Detalhe completo do board (Trazendo nome do board, colunas e card em cada coluna)
-**GET** `/cards/{id}` - Detalhe do card
+- **GET** `/boards` - Lista todos os boards com resumo
+- **GET** `/boards/{id}` - Detalhe completo do board (Trazendo nome do board, colunas e card em cada coluna)
+- **GET** `/cards/{id}` - Detalhe do card
 
 ## Endpoints Privados (com token)
 
