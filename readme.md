@@ -18,11 +18,6 @@ Copie as seguintes pastas do starter kit para seu projeto:
 - `app/Models/` → `app/Models/`
 - `.env` → sobrescrever o existente
 
-### 3. Configurar aplicação
-```bash
-php artisan key:generate
-```
-
 ### 4. Configurar banco e executar migrations
 ```bash
 php artisan migrate
